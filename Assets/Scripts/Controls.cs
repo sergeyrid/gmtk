@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
-    float speed = characteristics.speed;
-    float jumpHeight = characteristics.jumpHeight;
-    float airControl = characteristics.airControl;
-    float hp = characteristics.hp;
-    float strength = characteristics.strength;
-    float attackSpeed = characteristics.attackSpeed;
-    float dizziness = characteristics.dizziness;
+    float speed;
+    float jumpHeight;
+    float airControl;
+    float hp;
+    float strength;
+    float attackSpeed;
+    float dizziness;
 
     public Rigidbody2D body;
+    Characteristics characteristics;
 
     // Start is called before the first frame update
     void Start()
     {
+        characteristics = GetComponent<Characteristics>();
+        speed = characteristics.speed;
+        jumpHeight = characteristics.jumpHeight;
+        airControl = characteristics.airControl;
+        hp = characteristics.hp;
+        strength = characteristics.strength;
+        attackSpeed = characteristics.attackSpeed;
+        dizziness = characteristics.dizziness;
         body = GetComponent<Rigidbody2D>();
         Debug.Log(characteristics.speed);
     }
