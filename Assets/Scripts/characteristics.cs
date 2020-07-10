@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class characteristics : MonoBehaviour
 {
     public static float speed = 100;
     public static float jumpHeight = 100;
