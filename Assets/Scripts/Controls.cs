@@ -12,7 +12,7 @@ public class Controls : MonoBehaviour
     float attackSpeed;
     float dizziness;
 
-    public Rigidbody2D body;
+    Rigidbody2D body;
     Characteristics characteristics;
 
     // Start is called before the first frame update
