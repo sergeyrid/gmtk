@@ -14,7 +14,6 @@ public class CamEffects : MonoBehaviour
     {
         cam = Camera.main;
         camObj = cam.gameObject;
-        StartShake(2f,10,0.05f); 
     }
 
     void Shake()
