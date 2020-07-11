@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1865807584}
   - component: {fileID: 1865807588}
   - component: {fileID: 1865807589}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -465,9 +465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  acceleration: 20
+  acceleration: 15
   groundControl: 0.9
-  jumpHeight: 10
+  jumpHeight: 2000
   airControl: 0.3
   hp: 10
   strength: 1
