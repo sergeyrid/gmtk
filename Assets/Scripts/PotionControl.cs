@@ -13,6 +13,7 @@ public class PotionControl : MonoBehaviour
     public float deltaStrength = 20;
     public float deltaDizziness = 10;
     public float deltaAttackReach = 1;
+    public int deltaAttackCooldown = -1;
     Characteristics stats;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class PotionControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("q") && stats.potions > 0)
         {
             stats.speed += deltaSpeed;
             stats.acceleration += deltaAcceleration;
@@ -34,6 +35,8 @@ public class PotionControl : MonoBehaviour
             stats.strength += deltaStrength;
             stats.dizziness += deltaDizziness;
             stats.attackReach += deltaAttackReach;
+            stats.attackCooldown += deltaAttackCooldown;
+            --stats.potions;
         }
     }
 }
