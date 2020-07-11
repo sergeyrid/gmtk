@@ -49,7 +49,7 @@ public class Controls : MonoBehaviour
         dizziness = stats.dizziness;
         attackReach = stats.attackReach;
         attackCooldown = stats.attackCooldown;
-        if (body.velocity.x > 0 && direction == -1)
+        if (body.velocity.x > 0.1 && direction == -1)
         {
             Vector3 pos = transform.position;
             transform.position = new Vector3(pos.x, pos.y, -pos.z);
@@ -70,7 +70,7 @@ public class Controls : MonoBehaviour
                 child.connectedAnchor = new Vector2(-anc.x, anc.y);
             }
         }
-        else if (body.velocity.x < 0 && direction == 1)
+        else if (body.velocity.x < -0.1 && direction >= 0)
         {
             Vector3 pos = transform.position;
             transform.position = new Vector3(pos.x, pos.y, -pos.z);
@@ -127,19 +127,17 @@ public class Controls : MonoBehaviour
 
     void CheckIfOnGround()
     {
-        float delta = 1;
+        float delta = 2;
         Vector3 pos = transform.position;
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(pos.x, pos.y - height / 2),
                                              new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
         Debug.Log(pos);
         if (hit.collider != null)
         {
-            // Debug.Log("Nice");
             onGround = true;
         }
         else
         {
-            // Debug.Log(":(");
             onGround = false;
         }
     }
