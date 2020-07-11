@@ -7,9 +7,12 @@ public class EvilAi : MonoBehaviour
     public float walktime;
     public float waittime;
     public float speed;
+    public int playerLayer = 2;
+    public float attackReach;
+
     Rigidbody2D body;
 
-
+    int direction = -1;
     int state = 0;
     float previoustime;
     Animator anim;
@@ -50,6 +53,7 @@ public class EvilAi : MonoBehaviour
                 previoustime = Time.time;
                 state = 2;
                 anim.SetTrigger("ChangeState");
+                direction = 1;
                 flip();
             }
             
@@ -73,8 +77,20 @@ public class EvilAi : MonoBehaviour
                 previoustime = Time.time;
                 state = 0;
                 anim.SetTrigger("ChangeState");
+                direction = -1;
                 flip();
             }
+        }
+    }
+
+    void Attack()
+    {
+        RaycastHit2D []playersHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<playerLayer);
+        foreach (RaycastHit2D player in playersHit)
+        {
+            GameObject char = player.gameObject;
+            Controls cont = char.GetComponent<Controls>();
+            cont.
         }
     }
 
