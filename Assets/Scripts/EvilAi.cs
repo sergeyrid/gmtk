@@ -12,12 +12,22 @@ public class EvilAi : MonoBehaviour
 
     int state = 0;
     float previoustime;
+    Animator anim;
+    GameObject eye;
     // Start is called before the first frame update
     void Start()
     {
+        eye = GameObject.Find("eye-bg");
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         body.velocity = new Vector2(-speed, 0);
         previoustime = Time.time;
+    }
+
+    void flip()
+    {
+        eye.transform.localPosition = new Vector3(eye.transform.localPosition.x, eye.transform.localPosition.y, -eye.transform.localPosition.z);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 180 - transform.rotation.eulerAngles.y, 0));
     }
 
     void dowalkcycle()
@@ -29,6 +39,7 @@ public class EvilAi : MonoBehaviour
             {
                 previoustime = Time.time;
                 state = 1;
+                anim.SetTrigger("ChangeState");
             }
         }
         if (state == 1)
@@ -38,6 +49,8 @@ public class EvilAi : MonoBehaviour
             {
                 previoustime = Time.time;
                 state = 2;
+                anim.SetTrigger("ChangeState");
+                flip();
             }
             
         }
@@ -48,6 +61,8 @@ public class EvilAi : MonoBehaviour
             {
                 previoustime = Time.time;
                 state = 3;
+                anim.SetTrigger("ChangeState");
+                
             }
         }
         if (state == 3)
@@ -57,6 +72,8 @@ public class EvilAi : MonoBehaviour
             {
                 previoustime = Time.time;
                 state = 0;
+                anim.SetTrigger("ChangeState");
+                flip();
             }
         }
     }
