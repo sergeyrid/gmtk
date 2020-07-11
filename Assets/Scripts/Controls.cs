@@ -88,8 +88,16 @@ public class Controls : MonoBehaviour
     {
         float delta = 1;
         Vector3 pos = transform.position;
-        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(pos.x, pos.y - height / 2), new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
-        if (hit.collider != null)
+        Debug.DrawLine(pos, new Vector2(pos.x + (-Vector2.up.x * (height / 2 + delta)), pos.y + (-Vector2.up.y * (height / 2 + delta))), new Color(255, 0, 0));
+        RaycastHit2D hit = Physics2D.Raycast(pos, -Vector2.up, height / 2 + delta);
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector2(pos.x - width / 2, pos.y),
+                                                 -Vector2.up, height / 2 + delta);
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector2(pos.x + width / 2, pos.y),
+                                                  -Vector2.up, height / 2 + delta);
+        Debug.Log(hit.collider);
+        Debug.Log(hitLeft.collider);
+        Debug.Log(hitRight.collider);
+        if (hit.collider != null || hitLeft.collider != null || hitRight.collider != null)
         {
             Debug.Log("Nice");
             onGround = true;

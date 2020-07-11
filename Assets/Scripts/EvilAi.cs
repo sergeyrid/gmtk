@@ -60,6 +60,6 @@ public class EvilAi : MonoBehaviour
                 state = 0;
             }
         }
-        // Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
+        Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
     }
 }
