@@ -153,6 +153,7 @@ public class Controls : MonoBehaviour
         // animation
         SceneManager.LoadScene("SampleScene");
     }
+    
     public void TakeDamage(float damage)
     {
         // animation;
