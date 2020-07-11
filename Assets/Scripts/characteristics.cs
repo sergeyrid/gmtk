@@ -14,5 +14,5 @@ public class Characteristics : MonoBehaviour
     public float dizziness = 10;
     public float attackReach = 50;
     public int attackCooldown = 100;
-    public int potions = 3;
+    public int potions = 100;
 }
