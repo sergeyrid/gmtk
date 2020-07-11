@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Controls : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Controls : MonoBehaviour
     float dizziness;
     float attackReach;
     int attackCooldown;
-    Characteristics characteristics;
+    Characteristics stats;
     Rigidbody2D body;
     int direction = 1;
     float height;
@@ -29,23 +30,23 @@ public class Controls : MonoBehaviour
 
     void Start()
     {
-        characteristics = GetComponent<Characteristics>();
+        stats = GetComponent<Characteristics>();
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
     }
 
     void Update() {
-        speed = characteristics.speed;
-        acceleration = characteristics.acceleration;
-        jumpHeight = characteristics.jumpHeight;
-        slipperiness = characteristics.slipperiness;
-        airControl = characteristics.airControl;
-        strength = characteristics.strength;
-        hp = characteristics.hp;
-        dizziness = characteristics.dizziness;
-        attackReach = characteristics.attackReach;
-        attackCooldown = characteristics.attackCooldown;
+        speed = stats.speed;
+        acceleration = stats.acceleration;
+        jumpHeight = stats.jumpHeight;
+        slipperiness = stats.slipperiness;
+        airControl = stats.airControl;
+        strength = stats.strength;
+        hp = stats.hp;
+        dizziness = stats.dizziness;
+        attackReach = stats.attackReach;
+        attackCooldown = stats.attackCooldown;
         if (body.velocity.x > 0)
         {
             direction = 1;
@@ -55,6 +56,10 @@ public class Controls : MonoBehaviour
             direction = -1;
         }
         ProcessInput();
+        if (hp == 0)
+        {
+            Death();
+        }
     }
 
     void FixedUpdate()
@@ -92,12 +97,10 @@ public class Controls : MonoBehaviour
                                              new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
         if (hit.collider != null)
         {
-            Debug.Log("Nice");
             onGround = true;
         }
         else
         {
-            Debug.Log(":(");
             onGround = false;
         }
     }
@@ -143,5 +146,16 @@ public class Controls : MonoBehaviour
             Debug.Log("BANG!!!");
         }
         attackCurrentCooldown = attackCooldown;
+    }
+
+    void Death()
+    {
+        // animation
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void TakeDamage(float damage)
+    {
+        // animation;
+        stats.hp -= damage;
     }
 }
