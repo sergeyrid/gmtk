@@ -14,6 +14,7 @@ public class CamEffects : MonoBehaviour
     {
         cam = Camera.main;
         camObj = cam.gameObject;
+        //Camera.main.SetReplacementShader(Shader.Find("Custom/Shader"),"Opaque");
     }
 
     void Shake()

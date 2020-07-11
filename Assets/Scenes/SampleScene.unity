@@ -236,6 +236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3122166361861014458, guid: e488c3e859c785240b1d42bec1130247,
+        type: 3}
+      propertyPath: orthographic size
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3122166362839388389, guid: e488c3e859c785240b1d42bec1130247,
         type: 3}
       propertyPath: m_Name
@@ -295,6 +300,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162037426838660120, guid: e488c3e859c785240b1d42bec1130247,
+        type: 3}
+      propertyPath: objToTrack
+      value: 
+      objectReference: {fileID: 1865807583}
+    - target: {fileID: 3162037426838660120, guid: e488c3e859c785240b1d42bec1130247,
+        type: 3}
+      propertyPath: doFollow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162037426838660120, guid: e488c3e859c785240b1d42bec1130247,
+        type: 3}
+      propertyPath: speed
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e488c3e859c785240b1d42bec1130247, type: 3}
@@ -444,11 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21834c64df26ed745b01c65c1bd8c113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
+  acceleration: 20
   groundControl: 0.9
-  jumpHeight: 0
-  airControl: 0
-  hp: 0
-  strength: 0
-  attackSpeed: 0
-  dizziness: 0
+  jumpHeight: 10
+  airControl: 0.3
+  hp: 10
+  strength: 1
+  attackSpeed: 1
+  dizziness: 1
