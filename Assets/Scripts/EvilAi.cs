@@ -20,8 +20,7 @@ public class EvilAi : MonoBehaviour
         previoustime = Time.time;
     }
 
-    // Update is called once per frame
-    void Update()
+    void dowalkcycle()
     {
         if (state == 0)
         {   
@@ -60,6 +59,12 @@ public class EvilAi : MonoBehaviour
                 state = 0;
             }
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        dowalkcycle();
         Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
     }
 }
