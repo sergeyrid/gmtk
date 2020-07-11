@@ -12,6 +12,7 @@ public class EvilAi : MonoBehaviour
     public float damage;
     public float losedistance;
     public float sightdistance;
+    public float hp = 100;
 
     Rigidbody2D body;
 
@@ -112,9 +113,14 @@ public class EvilAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (hp <= 0)
+        {
+            // Debug.Log("I'm ded :(");
+            Destroy(gameObject);
+        }
         if (attacking)
         {
-            Debug.Log("JUST A PUSSY");
+            // Debug.Log("JUST A PUSSY");
             float delta = Time.time - attacktimestart;
             if (delta <= 0.32 && delta >= 0.28)
             {
@@ -125,7 +131,7 @@ public class EvilAi : MonoBehaviour
         }
         else if (sightedenemy)
         {
-            Debug.Log("FUCKING PUSSY");
+            // Debug.Log("FUCKING PUSSY");
             float dist = Vector3.Distance(enemy.transform.position, transform.position);
             if ((enemy.transform.position.x - transform.position.x) * direction < 0)
             {
@@ -152,9 +158,21 @@ public class EvilAi : MonoBehaviour
         }
         else
         {
-            Debug.Log("WALKING MENACE");
+            // Debug.Log("WALKING MENACE");
             dowalkcycle();
         }
         //Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
+    }
+
+    void Death()
+    {
+        // anim;
+        Destroy(this);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        // anim;
+        hp -= damage;
     }
 }

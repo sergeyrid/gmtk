@@ -34,8 +34,6 @@ public class Controls : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
-        Debug.Log(width);
-        Debug.Log(height);
     }
 
     void Update() {
@@ -104,7 +102,7 @@ public class Controls : MonoBehaviour
             }
         }
         ProcessInput();
-        if (hp == 0)
+        if (hp <= 0)
         {
             Death();
         }
@@ -143,7 +141,6 @@ public class Controls : MonoBehaviour
         Vector3 pos = transform.position;
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(pos.x, pos.y - height / 2),
                                              new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
-        Debug.Log(pos);
         if (hit.collider != null && !hit.collider.isTrigger)
         {
             onGround = true;
@@ -192,7 +189,8 @@ public class Controls : MonoBehaviour
         RaycastHit2D []enemiesHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<enemyLayer);
         foreach (RaycastHit2D enemy in enemiesHit)
         {
-            Debug.Log("BANG!!!");
+            EvilAi cont = enemy.transform.gameObject.GetComponent<EvilAi>();
+            cont.TakeDamage(strength);
         }
         attackCurrentCooldown = attackCooldown;
     }
