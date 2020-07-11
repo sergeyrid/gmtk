@@ -13,6 +13,7 @@ public class Controls : MonoBehaviour
     Rigidbody2D body;
     float height;
     bool onGround = true;
+    float movement;
 
     void Start()
     {
@@ -26,10 +27,23 @@ public class Controls : MonoBehaviour
         height = GetComponent<Collider2D>().bounds.size.y;
     }
 
+    void Update() {
+        ProcessInput();
+    }
+
     void FixedUpdate()
     {
         CheckIfOnGround();
         HorizontalMovement();
+    }
+
+    void ProcessInput()
+    {
+        movement = Input.GetAxisRaw("Horizontal") * speed * acceleration;
+        if (Input.GetButton("Jump"))
+        {
+            Jump();
+        }
     }
 
     void CheckIfOnGround()
@@ -48,8 +62,6 @@ public class Controls : MonoBehaviour
 
     void HorizontalMovement()
     {
-        float deltaSpeed = speed * acceleration;
-        float movement = Input.GetAxisRaw("Horizontal") * deltaSpeed;
         if (!onGround)
         {
             movement *= airControl;
@@ -65,6 +77,14 @@ public class Controls : MonoBehaviour
         if (Mathf.Abs(body.velocity.x) > speed)
         {
             body.velocity = new Vector2(speed * Mathf.Sign(body.velocity.x), body.velocity.y);
+        }
+    }
+
+    void Jump()
+    {
+        if (onGround)
+        {
+            body.AddForce(new Vector2(0, jumpHeight));
         }
     }
 }
