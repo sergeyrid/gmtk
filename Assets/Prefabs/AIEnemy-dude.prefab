@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1136559669460105313}
   - component: {fileID: 1136559669460105314}
   - component: {fileID: 1136559669460105312}
-  m_Layer: 0
-  m_Name: Enemy-dude 1
+  m_Layer: 8
+  m_Name: AIEnemy-dude
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661277178901480}
   - component: {fileID: 8353661277178901483}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye-bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661277473436333}
   - component: {fileID: 8353661277473436332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: limb-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661277763642525}
   - component: {fileID: 8353661277763642524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661277922225796}
   - component: {fileID: 8353661277922225799}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661278104027042}
   - component: {fileID: 8353661278104027045}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: claw2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661278194421555}
   - component: {fileID: 8353661278194421554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: limb-up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661278467560149}
   - component: {fileID: 8353661278467560148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: claw1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353661278497638950}
   - component: {fileID: 8353661278497638873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: limb-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
