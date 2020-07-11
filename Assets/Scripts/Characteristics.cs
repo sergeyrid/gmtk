@@ -9,7 +9,7 @@ public class Characteristics : MonoBehaviour
     public float slipperiness = 0.95f;
     public float jumpHeight = 2000;
     public float airControl = 0.3f;
-    public float hp = 10;
+    public float maxHp = 10;
     public float strength = 20;
     public float dizziness = 10;
     public float attackReach = 50;

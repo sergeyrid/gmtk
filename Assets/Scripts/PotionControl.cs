@@ -9,16 +9,18 @@ public class PotionControl : MonoBehaviour
     public float deltaSlipperiness = 0.002f;
     public float deltaJumpHeight = 200;
     public float deltaAirControl = -0.01f;
-    public float deltaHp = 10;
+    public float deltaMaxHp = 10;
     public float deltaStrength = 20;
     public float deltaDizziness = 10;
     public float deltaAttackReach = 1;
     public int deltaAttackCooldown = -1;
     Characteristics stats;
-    // Start is called before the first frame update
+    Controls controls;
+
     void Start()
     {
         stats = GetComponent<Characteristics>();
+        controls = GetComponent<Controls>();
     }
 
     // Update is called once per frame
@@ -31,12 +33,13 @@ public class PotionControl : MonoBehaviour
             stats.slipperiness += deltaSlipperiness;
             stats.jumpHeight += deltaJumpHeight;
             stats.airControl += deltaAirControl;
-            stats.hp += deltaHp;
+            stats.maxHp += deltaMaxHp;
             stats.strength += deltaStrength;
             stats.dizziness += deltaDizziness;
             stats.attackReach += deltaAttackReach;
             stats.attackCooldown += deltaAttackCooldown;
             --stats.potions;
+            controls.hp += deltaMaxHp;
         }
     }
 }
