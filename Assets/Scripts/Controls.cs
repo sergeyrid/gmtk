@@ -66,7 +66,7 @@ public class Controls : MonoBehaviour
         {
             movement *= airControl;
         }
-        if (movement == 0)
+        if (movement == 0 && onGround)
         {
             body.velocity = new Vector2(body.velocity.x * groundControl, body.velocity.y);
         }
