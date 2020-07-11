@@ -86,13 +86,17 @@ public class Controls : MonoBehaviour
 
     void CheckIfOnGround()
     {
-        float delta = 0.5f;
+        float delta = 1;
         Vector3 pos = transform.position;
+        Debug.DrawLine(pos, new Vector2(pos.x + (-Vector2.up.x * (height / 2 + delta)), pos.y + (-Vector2.up.y * (height / 2 + delta))), new Color(255, 0, 0));
         RaycastHit2D hit = Physics2D.Raycast(pos, -Vector2.up, height / 2 + delta);
-        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(pos.x - width / 2, pos.y, pos.z),
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector2(pos.x - width / 2, pos.y),
                                                  -Vector2.up, height / 2 + delta);
-        RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(pos.x + width / 2, pos.y, pos.z),
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector2(pos.x + width / 2, pos.y),
                                                   -Vector2.up, height / 2 + delta);
+        Debug.Log(hit.collider);
+        Debug.Log(hitLeft.collider);
+        Debug.Log(hitRight.collider);
         if (hit.collider != null || hitLeft.collider != null || hitRight.collider != null)
         {
             Debug.Log("Nice");
