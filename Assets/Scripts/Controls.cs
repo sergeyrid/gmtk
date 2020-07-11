@@ -9,13 +9,10 @@ public class Controls : MonoBehaviour
     float groundControl;
     float jumpHeight;
     float airControl;
-    float hp;
-    float strength;
-    float attackSpeed;
-    float dizziness;
-
-    Rigidbody2D body;
     Characteristics characteristics;
+    Rigidbody2D body;
+    float height;
+    bool onGround = true;
 
     void Start()
     {
@@ -25,18 +22,38 @@ public class Controls : MonoBehaviour
         jumpHeight = characteristics.jumpHeight;
         groundControl = characteristics.groundControl;
         airControl = characteristics.airControl;
-        hp = characteristics.hp;
-        strength = characteristics.strength;
-        attackSpeed = characteristics.attackSpeed;
-        dizziness = characteristics.dizziness;
         body = GetComponent<Rigidbody2D>();
-        Debug.Log(characteristics.speed);
+        height = GetComponent<Collider2D>().bounds.size.y;
     }
 
     void FixedUpdate()
     {
+        CheckIfOnGround();
+        HorizontalMovement();
+    }
+
+    void CheckIfOnGround()
+    {
+        float delta = 0.1f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, height / 2 + delta);
+        if (hit.collider != null)
+        {
+            onGround = true;
+        }
+        else
+        {
+            onGround = false;
+        }
+    }
+
+    void HorizontalMovement()
+    {
         float deltaSpeed = speed * acceleration;
         float movement = Input.GetAxisRaw("Horizontal") * deltaSpeed;
+        if (!onGround)
+        {
+            movement *= airControl;
+        }
         if (movement == 0)
         {
             body.velocity = new Vector2(body.velocity.x * groundControl, body.velocity.y);
