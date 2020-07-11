@@ -3962,10 +3962,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2113726363}
   - component: {fileID: 2113726365}
-  - component: {fileID: 2113726364}
   - component: {fileID: 2113726368}
   - component: {fileID: 2113726367}
   - component: {fileID: 2113726366}
+  - component: {fileID: 2113726364}
   m_Layer: 2
   m_Name: virgin-dude
   m_TagString: Untagged
@@ -3989,8 +3989,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2113726364
-BoxCollider2D:
+--- !u!70 &2113726364
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4002,19 +4002,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06934357, y: -0.84303856}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.863739, y: 8.285526}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.3565445, y: -0.76900005}
+  m_Size: {x: 2.339035, y: 8.464926}
+  m_Direction: 0
 --- !u!50 &2113726365
 Rigidbody2D:
   serializedVersion: 4
@@ -4030,7 +4020,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -4058,7 +4048,7 @@ MonoBehaviour:
   dizziness: 10
   attackReach: 50
   attackCooldown: 100
-  potions: 3
+  potions: 100
 --- !u!114 &2113726367
 MonoBehaviour:
   m_ObjectHideFlags: 0

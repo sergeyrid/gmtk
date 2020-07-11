@@ -62,8 +62,14 @@ public class Controls : MonoBehaviour
                 child.localPosition = new Vector3(p.x, p.y, -p.z);
             }
             HingeJoint2D[] allChildrenJoint = GetComponentsInChildren<HingeJoint2D>();
+            int i = 0;
             foreach (HingeJoint2D child in allChildrenJoint)
             {
+                ++i;
+                if (i % 2 == 0)
+                {
+                    continue;
+                }
                 Vector3 anc = child.anchor;
                 child.anchor = new Vector2(-anc.x, anc.y);
                 anc = child.connectedAnchor;
@@ -83,8 +89,14 @@ public class Controls : MonoBehaviour
                 child.localPosition = new Vector3(p.x, p.y, -p.z);
             }
             HingeJoint2D[] allChildrenJoint = GetComponentsInChildren<HingeJoint2D>();
+            int i = 0;
             foreach (HingeJoint2D child in allChildrenJoint)
             {
+                ++i;
+                if (i % 2 == 0)
+                {
+                    continue;
+                }
                 Vector3 anc = child.anchor;
                 child.anchor = new Vector2(-anc.x, anc.y);
                 anc = child.connectedAnchor;
@@ -132,7 +144,7 @@ public class Controls : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(pos.x, pos.y - height / 2),
                                              new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
         Debug.Log(pos);
-        if (hit.collider != null)
+        if (hit.collider != null && !hit.collider.isTrigger)
         {
             onGround = true;
         }
