@@ -20,7 +20,7 @@ public class EvilAi : MonoBehaviour
         eye = GameObject.Find("eye-bg");
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        body.velocity = new Vector2(-speed, 0);
+        body.velocity = new Vector2(-speed, body.velocity.y);
         previoustime = Time.time;
     }
 
@@ -34,7 +34,7 @@ public class EvilAi : MonoBehaviour
     {
         if (state == 0)
         {   
-            body.velocity = new Vector2(-speed, 0);
+            body.velocity = new Vector2(-speed, body.velocity.y);
             if (Time.time - previoustime >= walktime)
             {
                 previoustime = Time.time;
@@ -44,7 +44,7 @@ public class EvilAi : MonoBehaviour
         }
         if (state == 1)
         {
-            body.velocity = new Vector2(0, 0);
+            body.velocity = new Vector2(0, body.velocity.y);
             if (Time.time - previoustime >= waittime)
             {
                 previoustime = Time.time;
@@ -56,7 +56,7 @@ public class EvilAi : MonoBehaviour
         }
         if (state == 2)
         {
-            body.velocity = new Vector2(speed, 0);
+            body.velocity = new Vector2(speed, body.velocity.y);
             if (Time.time - previoustime >= walktime)
             {
                 previoustime = Time.time;
@@ -67,7 +67,7 @@ public class EvilAi : MonoBehaviour
         }
         if (state == 3)
         {
-            body.velocity = new Vector2(0, 0);
+            body.velocity = new Vector2(0, body.velocity.y);
             if (Time.time - previoustime >= waittime)
             {
                 previoustime = Time.time;
