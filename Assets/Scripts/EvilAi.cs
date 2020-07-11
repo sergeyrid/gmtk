@@ -25,6 +25,7 @@ public class EvilAi : MonoBehaviour
     Animator anim;
     GameObject eye;
     GameObject enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +99,7 @@ public class EvilAi : MonoBehaviour
         {
             Controls cont = player.transform.gameObject.GetComponent<Controls>();
             cont.TakeDamage(damage);
-            Debug.Log("TookDamage");
+            // Debug.Log("TookDamage");
         }
     }
 

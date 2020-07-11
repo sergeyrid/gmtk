@@ -10,7 +10,7 @@ public class Controls : MonoBehaviour
     float slipperiness;
     float jumpHeight;
     float airControl;
-    float hp;
+    float maxHp;
     float strength;
     float dizziness;
     float attackReach;
@@ -24,9 +24,9 @@ public class Controls : MonoBehaviour
     float movement;
     int attackCurrentCooldown = 0;
     int jumpCurrentCooldown = 0;
-
     public int jumpCooldown;
     public int enemyLayer = 8;
+    public float hp;
 
     void Start()
     {
@@ -34,6 +34,7 @@ public class Controls : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
+        hp = stats.maxHp;
     }
 
     void Update() {
@@ -43,7 +44,7 @@ public class Controls : MonoBehaviour
         slipperiness = stats.slipperiness;
         airControl = stats.airControl;
         strength = stats.strength;
-        hp = stats.hp;
+        maxHp = stats.maxHp;
         dizziness = stats.dizziness;
         attackReach = stats.attackReach;
         attackCooldown = stats.attackCooldown;
@@ -198,12 +199,13 @@ public class Controls : MonoBehaviour
     void Death()
     {
         // animation
+        Debug.Log("I'm ded too :(");
         SceneManager.LoadScene("SampleScene");
     }
     
     public void TakeDamage(float damage)
     {
         // animation;
-        stats.hp -= damage;
+        hp -= damage;
     }
 }

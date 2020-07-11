@@ -7,17 +7,24 @@ public class GetHealth : MonoBehaviour
 {
     public GameObject player;
     Characteristics stats;
+    Controls controls;
     Text textbox;
-    // Start is called before the first frame update
+
     void Start()
     {
         stats = player.GetComponent<Characteristics>();
+        controls = player.GetComponent<Controls>();
         textbox = GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        textbox.text = "Health: " + stats.hp.ToString();
+        Vector2 healthBar = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta;
+        transform.GetChild(0).GetComponent<RectTransform>().sizeDelta =
+                              new Vector2(stats.maxHp, healthBar.y);
+        Vector2 remainingHealth = transform.GetChild(1).GetComponent<RectTransform>().sizeDelta;
+        transform.GetChild(1).GetComponent<RectTransform>().sizeDelta =
+                              new Vector2(controls.hp, remainingHealth.y);
+        textbox.text = "Health: " + controls.hp.ToString();
     }
 }
