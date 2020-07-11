@@ -11,18 +11,20 @@ public class Controls : MonoBehaviour
     float airControl;
     float hp;
     float strength;
-    float attackSpeed;
-    float attackReach;
     float dizziness;
+    float attackReach;
+    int attackCooldown;
     Characteristics characteristics;
     Rigidbody2D body;
     int direction = 1;
     float height;
     bool onGround = true;
     float movement;
+    int attackCurrentCooldown = 0;
     int jumpCurrentCooldown = 0;
+
     public int jumpCooldown;
-    int enemyLayer = 8;
+    public int enemyLayer = 8;
 
     void Start()
     {
@@ -38,10 +40,18 @@ public class Controls : MonoBehaviour
         slipperiness = characteristics.slipperiness;
         airControl = characteristics.airControl;
         strength = characteristics.strength;
-        attackSpeed = characteristics.attackSpeed;
-        attackReach = characteristics.attackReach;
         hp = characteristics.hp;
         dizziness = characteristics.dizziness;
+        attackReach = characteristics.attackReach;
+        attackCooldown = characteristics.attackCooldown;
+        if (body.velocity.x > 0)
+        {
+            direction = 1;
+        }
+        else if (body.velocity.x < 0)
+        {
+            direction = -1;
+        }
         ProcessInput();
     }
 
@@ -50,6 +60,10 @@ public class Controls : MonoBehaviour
         if (jumpCurrentCooldown > 0)
         {
             --jumpCurrentCooldown;
+        }
+        if (attackCurrentCooldown > 0)
+        {
+            --attackCurrentCooldown;
         }
         CheckIfOnGround();
         HorizontalMovement();
@@ -113,16 +127,15 @@ public class Controls : MonoBehaviour
 
     void Attack()
     {
-        RaycastHit2D []enemiesHit = new RaycastHit2D[20];
-        ContactFilter2D enemyFilter = new ContactFilter2D();
-        enemyFilter.layerMask = 1 << enemyLayer;
-        Physics2D.Raycast(transform.position, Vector2.right * direction, enemyFilter, enemiesHit);
+        if (attackCurrentCooldown > 0)
+        {
+            return ;
+        }
+        RaycastHit2D []enemiesHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<enemyLayer);
         foreach (RaycastHit2D enemy in enemiesHit)
         {
-            if (enemy.collider != null)
-            {
-                Debug.Log("BANG");
-            }
+            Debug.Log("BANG!!!");
         }
+        attackCurrentCooldown = attackCooldown;
     }
 }
