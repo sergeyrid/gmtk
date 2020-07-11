@@ -5,6 +5,8 @@ using UnityEngine;
 public class Characteristics : MonoBehaviour
 {
     public float speed;
+    public float acceleration;
+    public float groundControl;
     public float jumpHeight;
     public float airControl;
     public float hp;
