@@ -9,6 +9,7 @@ public class EvilAi : MonoBehaviour
     public float speed;
     public int playerLayer = 2;
     public float attackReach;
+    public float damage;
 
     Rigidbody2D body;
 
@@ -88,9 +89,8 @@ public class EvilAi : MonoBehaviour
         RaycastHit2D []playersHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<playerLayer);
         foreach (RaycastHit2D player in playersHit)
         {
-            GameObject char = player.gameObject;
-            Controls cont = char.GetComponent<Controls>();
-            cont.
+            Controls cont = player.transform.gameObject.GetComponent<Controls>();
+            cont.TakeDamage(damage);
         }
     }
 
@@ -98,6 +98,6 @@ public class EvilAi : MonoBehaviour
     void Update()
     {
         dowalkcycle();
-        Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
+        //Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
     }
 }
