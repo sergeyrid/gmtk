@@ -18,6 +18,7 @@ public class Controls : MonoBehaviour
     Rigidbody2D body;
     int direction = 1;
     float height;
+    float width;
     bool onGround = true;
     float movement;
     int attackCurrentCooldown = 0;
@@ -31,6 +32,7 @@ public class Controls : MonoBehaviour
         characteristics = GetComponent<Characteristics>();
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
+        width = GetComponent<Collider2D>().bounds.size.x;
     }
 
     void Update() {
@@ -84,14 +86,21 @@ public class Controls : MonoBehaviour
 
     void CheckIfOnGround()
     {
-        float delta = 0.1f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, height / 2 + delta);
-        if (hit.collider != null)
+        float delta = 0.5f;
+        Vector3 pos = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(pos, -Vector2.up, height / 2 + delta);
+        RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(pos.x - width / 2, pos.y, pos.z),
+                                                 -Vector2.up, height / 2 + delta);
+        RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(pos.x + width / 2, pos.y, pos.z),
+                                                  -Vector2.up, height / 2 + delta);
+        if (hit.collider != null || hitLeft.collider != null || hitRight.collider != null)
         {
+            Debug.Log("Nice");
             onGround = true;
         }
         else
         {
+            Debug.Log(":(");
             onGround = false;
         }
     }
