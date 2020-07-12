@@ -51,7 +51,7 @@ MonoBehaviour:
   evilStep: {fileID: 8300000, guid: 04468ee1aaa6b5348b171768e52a66cd, type: 3}
   playerDeath: {fileID: 8300000, guid: c0172d0c66df79649ad0fbe0789b2464, type: 3}
   evilDeath: {fileID: 8300000, guid: 64f453ebd6e76a34bb5c8596e6957412, type: 3}
-  flyDeath: {fileID: 8300000, guid: 4dbc351b47b256d4096bf23535a4e4aa, type: 3}
+  flyDeath: {fileID: 8300000, guid: 51beda1721ea59740b3f7ecfafd27313, type: 3}
   playerDamage: {fileID: 8300000, guid: 95f2dfad3d905f446ac2f817dc655eab, type: 3}
   evilDamage: {fileID: 8300000, guid: 37c46e94e8abd0e4fa04b89dda14cf51, type: 3}
   flyFly: {fileID: 8300000, guid: 1e30e755164bb634e92329cb94491888, type: 3}

@@ -135,6 +135,7 @@ public class EvilFly : MonoBehaviour
         source.PlayOneShot(audio, 0.1f);
         if (hp <= 0)
         {
+            hp = Mathf.Infinity;
             Death();
         }
         if (attacking)
@@ -196,7 +197,7 @@ public class EvilFly : MonoBehaviour
     {
         AudioClip audio = audioManager.GetComponent<GetAudio>().flyDeath;
         source.PlayOneShot(audio);
-        Invoke("Suicide", 0.5f);
+        Invoke("Suicide", 1f);
     }
 
     public void TakeDamage(float damage)
