@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585170709294}
   - component: {fileID: 1786615585170709295}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: arm-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585218410865}
   - component: {fileID: 1786615585218410866}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: leg-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585332024224}
   - component: {fileID: 1786615585332024225}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: leg-low-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 1786615585347083930}
   - component: {fileID: 1786615585347083932}
   - component: {fileID: 1786615585347083931}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585356044857}
   - component: {fileID: 1786615585356044858}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: leg-low-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585408484121}
   - component: {fileID: 1786615585408484122}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: arm-low-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585440981484}
   - component: {fileID: 1786615585440981485}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: hand-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585557729721}
   - component: {fileID: 1786615585557729722}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: leg-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615585775984727}
   - component: {fileID: 1786615585775984728}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: arm-low-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 1786615586056490686}
   - component: {fileID: 1786615586056490684}
   - component: {fileID: 1786615586056490625}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: virgin-dude
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,9 +837,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCooldown: 10
-  enemyLayer: 8
   animator: {fileID: 1786615586056490625}
   hp: 0
+  enemyLayer: 8
+  playerLayer: 10
+  ignoreLayer: 2
 --- !u!114 &1786615586056490687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,7 +886,7 @@ MonoBehaviour:
   dizziness: 10
   attackReach: 50
   attackCooldown: 100
-  potions: 100
+  potions: 20
 --- !u!70 &1786615586056490684
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -930,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586077243740}
   - component: {fileID: 1786615586077243741}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: feet-l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586276434960}
   - component: {fileID: 1786615586276434961}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: arm-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586285917668}
   - component: {fileID: 1786615586285917669}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: hand-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586398413143}
   - component: {fileID: 1786615586398413144}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: pant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586415567575}
   - component: {fileID: 1786615586415567576}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: feet-r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1343,7 +1345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786615586470624548}
   - component: {fileID: 1786615586470624549}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1435,7 +1437,7 @@ PrefabInstance:
     - target: {fileID: 2033326817735648211, guid: 2c1c848de3b6867498b06963122a82bb,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2033326817735648222, guid: 2c1c848de3b6867498b06963122a82bb,
         type: 3}
