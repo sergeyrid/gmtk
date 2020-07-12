@@ -43,6 +43,14 @@ public class Controls : MonoBehaviour
     }
 
     void Update() {
+        if (dead)
+        {
+            body.velocity = new Vector2(0, 0);
+            animator.SetBool("running", false);
+            animator.SetBool("jumping", false);
+            Death();
+            return ;
+        }
         speed = stats.speed;
         acceleration = stats.acceleration;
         jumpHeight = stats.jumpHeight;
@@ -116,6 +124,10 @@ public class Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (dead)
+        {
+            return ;
+        }
         bool currentlyJumping = false;
 
         if (jumpCurrentCooldown > 0)
