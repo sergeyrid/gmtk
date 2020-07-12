@@ -21,6 +21,7 @@ public class Controls : MonoBehaviour
     float height;
     float width;
     bool onGround = true;
+    bool dead = false;
     float movement;
     int attackCurrentCooldown = 0;
     int jumpCurrentCooldown = 0;
@@ -235,11 +236,21 @@ public class Controls : MonoBehaviour
         attackCurrentCooldown = attackCooldown;
     }
 
+    void LoadLevel()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
     void Death()
     {
-        // animation
-        Debug.Log("I'm ded too :(");
-        SceneManager.LoadScene("SampleScene");
+        if (dead)
+        {
+            animator.SetBool("dead", false);
+            return ;
+        }
+        dead = true;
+        animator.SetBool("dead", true);
+        Invoke("LoadLevel", 1);
     }
     
     public void TakeDamage(float damage)
