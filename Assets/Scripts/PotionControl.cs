@@ -30,9 +30,20 @@ public class PotionControl : MonoBehaviour
         {
             stats.speed += deltaSpeed;
             stats.acceleration += deltaAcceleration;
-            stats.slipperiness += deltaSlipperiness;
+            if (stats.slipperiness < 0.98f)
+            {
+                stats.slipperiness += 0.01f;
+            }
+            else if (stats.slipperiness < 0.99f)
+            {
+                stats.slipperiness += 0.002f;
+            }
+            else
+            {
+                stats.slipperiness += 0.001f;
+            }
             stats.jumpHeight += deltaJumpHeight;
-            stats.airControl += deltaAirControl;
+            stats.airControl *= deltaAirControl;
             stats.maxHp += deltaMaxHp;
             stats.strength += deltaStrength;
             stats.dizziness += deltaDizziness;

@@ -861,14 +861,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deltaSpeed: 5
-  deltaAcceleration: 1
-  deltaSlipperiness: 0.002
+  deltaAcceleration: 0
+  deltaSlipperiness: 1.0026
   deltaJumpHeight: 200
-  deltaAirControl: -0.01
+  deltaAirControl: 0.8
   deltaMaxHp: 10
-  deltaStrength: 20
+  deltaStrength: 10
   deltaDizziness: 0.3
-  deltaAttackReach: 1
+  deltaAttackReach: 5
   deltaAttackCooldown: -1
 --- !u!114 &1786615586056490686
 MonoBehaviour:
@@ -891,7 +891,7 @@ MonoBehaviour:
   strength: 20
   dizziness: 0
   attackReach: 50
-  attackCooldown: 100
+  attackCooldown: 20
   potions: 20
 --- !u!70 &1786615586056490684
 CapsuleCollider2D:
