@@ -7,7 +7,7 @@ public class EvilFly : MonoBehaviour
     public float walktime;
     public float waittime;
     public float speed;
-    public int playerLayer = 2;
+    public int playerLayer = 10;
     public float attackReach;
     public float damage;
     public float losedistance;
@@ -22,6 +22,7 @@ public class EvilFly : MonoBehaviour
     bool attacking = false;
     float attacktimestart;
     float previoustime;
+    float height;
     Animator anim;
     GameObject eye;
     GameObject eyelid;
@@ -35,11 +36,7 @@ public class EvilFly : MonoBehaviour
         anim = GetComponent<Animator>();
         body.velocity = new Vector2(-speed, body.velocity.y);
         previoustime = Time.time;
-    }
-
-    void OnDrawGizmos()
-    {
-        
+        height = GetComponent<Collider2D>().bounds.size.y;
     }
 
     void flip()
@@ -100,7 +97,9 @@ public class EvilFly : MonoBehaviour
 
     void Attack()
     {
-        RaycastHit2D []playersHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<playerLayer);
+        Debug.Log("Die human");
+        RaycastHit2D []playersHit = Physics2D.BoxCastAll(transform.position, new Vector2(height / 2, attackReach / 2),
+                                                         0, Vector2.right * direction, attackReach, 1<<playerLayer);
         anim.SetBool("Attacking",true);
         foreach (RaycastHit2D player in playersHit)
         {
@@ -117,6 +116,10 @@ public class EvilFly : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.transform.gameObject.layer != playerLayer)
+        {
+            return ;
+        }
         enemy = other.gameObject;
         sightedenemy = true;
         state = 0;
@@ -155,6 +158,10 @@ public class EvilFly : MonoBehaviour
             {
                 sightedenemy = false;
                 previoustime = Time.time;
+                if (direction == 1)
+                {
+                    flip();
+                }
                 direction = -1;
             }
             else if (dist > attackReach) 
@@ -179,7 +186,7 @@ public class EvilFly : MonoBehaviour
     void Death()
     {
         // anim;
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public void TakeDamage(float damage)

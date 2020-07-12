@@ -7,7 +7,7 @@ public class EvilAi : MonoBehaviour
     public float walktime;
     public float waittime;
     public float speed;
-    public int playerLayer = 2;
+    public int playerLayer = 10;
     public float attackReach;
     public float damage;
     public float losedistance;
@@ -94,17 +94,22 @@ public class EvilAi : MonoBehaviour
 
     void Attack()
     {
-        RaycastHit2D []playersHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<playerLayer);
+        RaycastHit2D []playersHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction,
+                                                         attackReach, 1<<playerLayer);
         foreach (RaycastHit2D player in playersHit)
         {
             Controls cont = player.transform.gameObject.GetComponent<Controls>();
             cont.TakeDamage(damage);
-            // Debug.Log("TookDamage");
+            Debug.Log("TookDamage");
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.transform.gameObject.layer != playerLayer)
+        {
+            return ;
+        }
         enemy = other.gameObject;
         sightedenemy = true;
         state = 0;
@@ -121,7 +126,7 @@ public class EvilAi : MonoBehaviour
         }
         if (attacking)
         {
-            Debug.Log("JUST A PUSSY");
+            // Debug.Log("JUST A PUSSY");
             float delta = Time.time - attacktimestart;
             if (delta <= 0.32 && delta >= 0.28)
             {
@@ -132,7 +137,7 @@ public class EvilAi : MonoBehaviour
         }
         else if (sightedenemy)
         {
-            Debug.Log("FUCKING PUSSY");
+            // Debug.Log("FUCKING PUSSY");
             float dist = Vector3.Distance(enemy.transform.position, transform.position);
             if ((enemy.transform.position.x - transform.position.x) * direction < 0)
             {
@@ -163,7 +168,7 @@ public class EvilAi : MonoBehaviour
         }
         else
         {
-            Debug.Log("WALKING MENACE");
+            // Debug.Log("WALKING MENACE");
             dowalkcycle();
         }
         //Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
