@@ -250,8 +250,7 @@ public class Controls : MonoBehaviour
 
     void LoadLevel()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(activeScene.name);
+        SceneManager.LoadScene("SampleScene");
     }
 
     void Death()
