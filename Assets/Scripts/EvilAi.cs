@@ -25,7 +25,9 @@ public class EvilAi : MonoBehaviour
     Animator anim;
     ParticleSystem parSys;
     GameObject eye;
-    GameObject enemy;
+    public GameObject enemy;
+    AudioSource source;
+    public GameObject audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class EvilAi : MonoBehaviour
         eye = GameObject.Find("eye-bg");
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         parSys = GetComponent<ParticleSystem>();
         body.velocity = new Vector2(-speed, body.velocity.y);
         previoustime = Time.time;
@@ -47,7 +50,7 @@ public class EvilAi : MonoBehaviour
     void dowalkcycle()
     {
         if (state == 0)
-        {   
+        {
             body.velocity = new Vector2(-speed, body.velocity.y);
             if (Time.time - previoustime >= walktime)
             {
@@ -100,6 +103,8 @@ public class EvilAi : MonoBehaviour
                                                          attackReach, 1<<playerLayer);
         foreach (RaycastHit2D player in playersHit)
         {
+            AudioClip audio = audioManager.GetComponent<GetAudio>().evilAttack;
+            source.PlayOneShot(audio);
             Controls cont = player.transform.gameObject.GetComponent<Controls>();
             cont.TakeDamage(damage);
             Debug.Log("TookDamage");
@@ -123,8 +128,13 @@ public class EvilAi : MonoBehaviour
     {
         if (hp <= 0)
         {
-            // Debug.Log("I'm ded :(");
-            Destroy(gameObject);
+            hp = Mathf.Infinity;
+            Death();
+        }
+        if (!source.isPlaying && Mathf.Abs(body.velocity.x) > 0)
+        {
+            AudioClip audio = audioManager.GetComponent<GetAudio>().evilStep;
+            source.PlayOneShot(audio);
         }
         if (attacking)
         {
@@ -146,7 +156,6 @@ public class EvilAi : MonoBehaviour
                 direction *= -1;
                 flip();
             }
-
             if (dist > losedistance)
             {
                 sightedenemy = false;
@@ -176,16 +185,24 @@ public class EvilAi : MonoBehaviour
         //Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
     }
 
+    void Suicide()
+    {
+        Destroy(gameObject);
+    }
+
     void Death()
     {
-        // anim;
-        Destroy(this);
+        AudioClip audio = audioManager.GetComponent<GetAudio>().evilDeath;
+        source.PlayOneShot(audio);
+        Invoke("Suicide", 0.5f);
     }
 
     public void TakeDamage(float damage)
     {
-        // anim;
+        AudioClip audio = audioManager.GetComponent<GetAudio>().evilDamage;
+        source.PlayOneShot(audio);
         parSys.Play();
+        sightedenemy = true;
         hp -= damage;
     }
 }

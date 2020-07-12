@@ -838,15 +838,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCooldown: 10
+  animator: {fileID: 1786615586056490625}
+  hp: 0
+  movementAudio: 0.5
   enemyLayer: 8
   playerLayer: 10
   defaultLayer: 0
   physicsLayer: 9
   ignoreLayer: 2
-  audioManager: {fileID: 0}
-  animator: {fileID: 1786615586056490625}
-  hp: 0
-  movementAudio: 0.5
+  audioManager: {fileID: 1786383853120547107, guid: 12eee1e2125661e4db4ee9d3477f4957,
+    type: 3}
 --- !u!114 &1786615586056490687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +940,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.31
+  m_Volume: 0.09
   m_Pitch: 1
   Loop: 0
   Mute: 0
