@@ -46,9 +46,6 @@ public class Controls : MonoBehaviour
         if (dead)
         {
             body.velocity = new Vector2(0, 0);
-            animator.SetBool("running", false);
-            animator.SetBool("jumping", false);
-            Death();
             return ;
         }
         speed = stats.speed;
@@ -250,16 +247,12 @@ public class Controls : MonoBehaviour
 
     void LoadLevel()
     {
-        SceneManager.LoadScene("SampleScene");
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.name);
     }
 
     void Death()
     {
-        if (dead)
-        {
-            animator.SetBool("dead", false);
-            return ;
-        }
         dead = true;
         animator.SetBool("dead", true);
         Invoke("LoadLevel", 1);
@@ -269,5 +262,9 @@ public class Controls : MonoBehaviour
     {
         // animation;
         hp -= damage;
+        if (hp < 0)
+        {
+            hp = 0;
+        }
     }
 }

@@ -837,11 +837,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCooldown: 10
-  animator: {fileID: 1786615586056490625}
-  hp: 0
   enemyLayer: 8
   playerLayer: 10
   ignoreLayer: 2
+  animator: {fileID: 1786615586056490625}
+  hp: 0
 --- !u!114 &1786615586056490687
 MonoBehaviour:
   m_ObjectHideFlags: 0
