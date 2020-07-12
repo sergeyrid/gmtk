@@ -219,7 +219,6 @@ public class Controls : MonoBehaviour
         {
             body.velocity = new Vector2(speed * Mathf.Sign(body.velocity.x), body.velocity.y);
         }
-
         if(isWalking && onGround)
         {
             animator.SetBool("running", true);
