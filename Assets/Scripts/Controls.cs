@@ -21,6 +21,7 @@ public class Controls : MonoBehaviour
     float height;
     float width;
     bool onGround = true;
+    bool dead = false;
     float movement;
     int attackCurrentCooldown = 0;
     int jumpCurrentCooldown = 0;
@@ -42,6 +43,14 @@ public class Controls : MonoBehaviour
     }
 
     void Update() {
+        if (dead)
+        {
+            body.velocity = new Vector2(0, 0);
+            animator.SetBool("running", false);
+            animator.SetBool("jumping", false);
+            Death();
+            return ;
+        }
         speed = stats.speed;
         acceleration = stats.acceleration;
         jumpHeight = stats.jumpHeight;
@@ -115,6 +124,10 @@ public class Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (dead)
+        {
+            return ;
+        }
         bool currentlyJumping = false;
 
         if (jumpCurrentCooldown > 0)
@@ -235,11 +248,22 @@ public class Controls : MonoBehaviour
         attackCurrentCooldown = attackCooldown;
     }
 
+    void LoadLevel()
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.name);
+    }
+
     void Death()
     {
-        // animation
-        Debug.Log("I'm ded too :(");
-        SceneManager.LoadScene("SampleScene");
+        if (dead)
+        {
+            animator.SetBool("dead", false);
+            return ;
+        }
+        dead = true;
+        animator.SetBool("dead", true);
+        Invoke("LoadLevel", 1);
     }
     
     public void TakeDamage(float damage)
