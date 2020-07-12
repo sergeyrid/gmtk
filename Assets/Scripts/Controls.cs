@@ -25,12 +25,11 @@ public class Controls : MonoBehaviour
     int attackCurrentCooldown = 0;
     int jumpCurrentCooldown = 0;
     public int jumpCooldown;
-    public int enemyLayer = 8;
-<<<<<<< HEAD
     public Animator animator;
-=======
     public float hp;
->>>>>>> b7f29f4ae0542c6e638acc3d01651844e83120bc
+    public int enemyLayer = 8;
+    public int playerLayer = 10;
+    public int ignoreLayer = 2;
 
     void Start()
     {
@@ -38,11 +37,8 @@ public class Controls : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
-<<<<<<< HEAD
         animator = gameObject.GetComponent<Animator>();
-=======
         hp = stats.maxHp;
->>>>>>> b7f29f4ae0542c6e638acc3d01651844e83120bc
     }
 
     void Update() {
@@ -160,8 +156,10 @@ public class Controls : MonoBehaviour
         float delta = 2;
         Vector3 pos = transform.position;
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(pos.x, pos.y - height / 2),
-                                             new Vector2(width / 2, delta), 0, -Vector2.up, ~(1<<2));
-        if (hit.collider != null && !hit.collider.isTrigger)
+                                             new Vector2(width / 2, delta),
+                                             0, -Vector2.up, delta,
+                                             ~((1 << playerLayer) | (1 << enemyLayer) | (1 << ignoreLayer)));
+        if (hit.collider != null)
         {
             onGround = true;
         }
@@ -192,12 +190,9 @@ public class Controls : MonoBehaviour
             body.velocity = new Vector2(speed * Mathf.Sign(body.velocity.x), body.velocity.y);
         }
 
-        if(isWalking)
+        if(isWalking && onGround)
         {
-            if(onGround)
-            {
-                animator.SetBool("running", true);
-            }
+            animator.SetBool("running", true);
         }
         else
         {
@@ -225,7 +220,17 @@ public class Controls : MonoBehaviour
         foreach (RaycastHit2D enemy in enemiesHit)
         {
             EvilAi cont = enemy.transform.gameObject.GetComponent<EvilAi>();
-            cont.TakeDamage(strength);
+            if (cont != null)
+            {
+                cont.TakeDamage(strength);
+            }
+            else
+            {
+                Debug.Log(enemy);
+                EvilFly cnt = enemy.transform.gameObject.GetComponent<EvilFly>();
+                Debug.Log(cnt);
+                cnt.TakeDamage(strength);
+            }
         }
         attackCurrentCooldown = attackCooldown;
     }

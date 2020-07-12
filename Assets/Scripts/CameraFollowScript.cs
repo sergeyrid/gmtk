@@ -15,7 +15,7 @@ public class CameraFollowScript : MonoBehaviour
         if(doFollow)
         {
             Vector3 pos = Vector2.Lerp(transform.position, objToTrack.transform.position, Time.deltaTime/speed);
-            pos.z = -10;
+            pos.z = -100;
             transform.position = pos;
         }
     }
