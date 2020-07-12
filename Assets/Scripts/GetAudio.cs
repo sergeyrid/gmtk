@@ -10,4 +10,6 @@ public class GetAudio : MonoBehaviour
     public AudioClip dirtStep;
     public AudioClip woodStep;
     public AudioClip evilStep;
+    public AudioClip playerDeath;
+    public AudioClip playerDamage;
 }

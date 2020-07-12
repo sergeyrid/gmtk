@@ -28,6 +28,7 @@ public class Controls : MonoBehaviour
     public int jumpCooldown;
     public Animator animator;
     public float hp;
+    public float movementAudio = 0.5f;
     public int enemyLayer = 8;
     public int playerLayer = 10;
     public int defaultLayer = 0;
@@ -178,14 +179,14 @@ public class Controls : MonoBehaviour
         {
             onGround = true;
             if (hit.collider.transform.gameObject.layer == physicsLayer &&
-                Mathf.Abs(body.velocity.x) > 0.3f &&
+                Mathf.Abs(body.velocity.x) > movementAudio &&
                 !source.isPlaying)
             {
                 AudioClip audio = audioManager.GetComponent<GetAudio>().woodStep;
                 source.PlayOneShot(audio);
             }
             else if (hit.collider.transform.gameObject.layer == defaultLayer &&
-                     Mathf.Abs(body.velocity.x) > 0.3f &&
+                     Mathf.Abs(body.velocity.x) > movementAudio &&
                      !source.isPlaying)
             {
                 AudioClip audio = audioManager.GetComponent<GetAudio>().dirtStep;
@@ -248,7 +249,6 @@ public class Controls : MonoBehaviour
         RaycastHit2D []enemiesHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction,
                                                          attackReach, 1<<enemyLayer);
         AudioClip audio = audioManager.GetComponent<GetAudio>().playerAttack;
-        Debug.Log(audio);
         source.PlayOneShot(audio);
         foreach (RaycastHit2D enemy in enemiesHit)
         {
@@ -274,14 +274,21 @@ public class Controls : MonoBehaviour
 
     void Death()
     {
+        AudioClip audio = audioManager.GetComponent<GetAudio>().playerDeath;
+        source.PlayOneShot(audio);
         dead = true;
         animator.SetBool("dead", true);
-        Invoke("LoadLevel", 1);
+        Invoke("LoadLevel", 1.4f);
     }
     
     public void TakeDamage(float damage)
     {
-        animator.SetTrigger("getDamage");
+        if (!dead)
+        {
+            animator.SetTrigger("getDamage");
+            AudioClip audio = audioManager.GetComponent<GetAudio>().playerDamage;
+            source.PlayOneShot(audio);
+        }
         hp -= damage;
         if (hp < 0)
         {
