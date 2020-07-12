@@ -27,13 +27,16 @@ public class EvilFly : MonoBehaviour
     GameObject eye;
     GameObject eyelid;
     GameObject enemy;
-    // Start is called before the first frame update
+    AudioSource source;
+    public GameObject audioManager;
+
     void Start()
     {
         eye = transform.Find("body/eye").gameObject;
         eyelid = transform.Find("body/eyelid").gameObject;
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         body.velocity = new Vector2(-speed, body.velocity.y);
         previoustime = Time.time;
         height = GetComponent<Collider2D>().bounds.size.y;
@@ -126,9 +129,10 @@ public class EvilFly : MonoBehaviour
         Debug.Log("Collided");
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        AudioClip audio = audioManager.GetComponent<GetAudio>().flyFly;
+        source.PlayOneShot(audio, 0.1f);
         if (hp <= 0)
         {
             Death();
@@ -183,15 +187,22 @@ public class EvilFly : MonoBehaviour
         //Debug.Log(previoustime.ToString()+' '+ Time.time.ToString());
     }
 
+    void Suicide()
+    {
+        Destroy(gameObject);
+    }
+
     void Death()
     {
-        // anim;
-        Destroy(gameObject);
+        AudioClip audio = audioManager.GetComponent<GetAudio>().flyDeath;
+        source.PlayOneShot(audio);
+        Invoke("Suicide", 0.5f);
     }
 
     public void TakeDamage(float damage)
     {
-        // anim;
+        AudioClip audio = audioManager.GetComponent<GetAudio>().evilDamage;
+        source.PlayOneShot(audio);
         hp -= damage;
     }
 }

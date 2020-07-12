@@ -43,11 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a607d329c5021e04ab41235931e0b4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttack: {fileID: 8300000, guid: 37c46e94e8abd0e4fa04b89dda14cf51, type: 3}
-  evilAttack: {fileID: 0}
+  playerAttack: {fileID: 8300000, guid: de157128cf340d04e86c316bfee705d0, type: 3}
+  evilAttack: {fileID: 8300000, guid: 9bc8ff7b236cc324cb92593f28913145, type: 3}
   flyAttack: {fileID: 8300000, guid: 1da58aecb5811ff4180dcd69b2d90e05, type: 3}
   dirtStep: {fileID: 8300000, guid: 688f44f24d7733748a6fef38f9cf6dde, type: 3}
   woodStep: {fileID: 8300000, guid: 4dbc351b47b256d4096bf23535a4e4aa, type: 3}
   evilStep: {fileID: 8300000, guid: 04468ee1aaa6b5348b171768e52a66cd, type: 3}
   playerDeath: {fileID: 8300000, guid: c0172d0c66df79649ad0fbe0789b2464, type: 3}
+  evilDeath: {fileID: 8300000, guid: 64f453ebd6e76a34bb5c8596e6957412, type: 3}
+  flyDeath: {fileID: 8300000, guid: 4dbc351b47b256d4096bf23535a4e4aa, type: 3}
   playerDamage: {fileID: 8300000, guid: 95f2dfad3d905f446ac2f817dc655eab, type: 3}
+  evilDamage: {fileID: 8300000, guid: 37c46e94e8abd0e4fa04b89dda14cf51, type: 3}
+  flyFly: {fileID: 8300000, guid: 1e30e755164bb634e92329cb94491888, type: 3}
