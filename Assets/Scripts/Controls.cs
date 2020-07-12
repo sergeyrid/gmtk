@@ -27,6 +27,7 @@ public class Controls : MonoBehaviour
 
     public int jumpCooldown;
     public int enemyLayer = 8;
+    public Animator animator;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class Controls : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update() {
@@ -110,8 +112,11 @@ public class Controls : MonoBehaviour
 
     void FixedUpdate()
     {
+        bool currentlyJumping = false;
+
         if (jumpCurrentCooldown > 0)
         {
+            currentlyJumping = true;
             --jumpCurrentCooldown;
         }
         if (attackCurrentCooldown > 0)
@@ -120,6 +125,14 @@ public class Controls : MonoBehaviour
         }
         CheckIfOnGround();
         HorizontalMovement();
+
+        if (jumpCurrentCooldown <= 0)
+            currentlyJumping = false;
+
+        if(!currentlyJumping)
+        {
+            animator.SetBool("jumping", false);
+        }
     }
 
     void ProcessInput()
@@ -153,6 +166,7 @@ public class Controls : MonoBehaviour
 
     void HorizontalMovement()
     {
+        bool isWalking = false;
         if (!onGround)
         {
             movement *= airControl;
@@ -164,10 +178,23 @@ public class Controls : MonoBehaviour
         else
         {
             body.AddForce(new Vector2(movement, 0));
+            isWalking = true;
         }
         if (Mathf.Abs(body.velocity.x) > speed)
         {
             body.velocity = new Vector2(speed * Mathf.Sign(body.velocity.x), body.velocity.y);
+        }
+
+        if(isWalking)
+        {
+            if(onGround)
+            {
+                animator.SetBool("running", true);
+            }
+        }
+        else
+        {
+            animator.SetBool("running", false);
         }
     }
 
@@ -177,6 +204,7 @@ public class Controls : MonoBehaviour
         {
             body.AddForce(new Vector2(0, jumpHeight));
             jumpCurrentCooldown = jumpCooldown;
+            animator.SetBool("jumping", true);
         }
     }
 
