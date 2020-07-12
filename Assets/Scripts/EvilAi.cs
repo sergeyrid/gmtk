@@ -23,6 +23,7 @@ public class EvilAi : MonoBehaviour
     float attacktimestart;
     float previoustime;
     Animator anim;
+    ParticleSystem parSys;
     GameObject eye;
     GameObject enemy;
 
@@ -32,6 +33,7 @@ public class EvilAi : MonoBehaviour
         eye = GameObject.Find("eye-bg");
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        parSys = GetComponent<ParticleSystem>();
         body.velocity = new Vector2(-speed, body.velocity.y);
         previoustime = Time.time;
     }
@@ -128,7 +130,7 @@ public class EvilAi : MonoBehaviour
         {
             // Debug.Log("JUST A PUSSY");
             float delta = Time.time - attacktimestart;
-            if (delta <= 0.32 && delta >= 0.28)
+            if (delta <= 0.33 && delta >= 0.29)
             {
                 Attack();
                 attacking = false;
@@ -183,6 +185,7 @@ public class EvilAi : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // anim;
+        parSys.Play();
         hp -= damage;
     }
 }
