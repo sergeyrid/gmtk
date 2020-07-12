@@ -867,7 +867,7 @@ MonoBehaviour:
   deltaAirControl: -0.01
   deltaMaxHp: 10
   deltaStrength: 20
-  deltaDizziness: 10
+  deltaDizziness: 0.3
   deltaAttackReach: 1
   deltaAttackCooldown: -1
 --- !u!114 &1786615586056490686
@@ -889,7 +889,7 @@ MonoBehaviour:
   airControl: 0.3
   maxHp: 10
   strength: 20
-  dizziness: 10
+  dizziness: 0
   attackReach: 50
   attackCooldown: 100
   potions: 20

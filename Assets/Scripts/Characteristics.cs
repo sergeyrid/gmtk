@@ -11,7 +11,7 @@ public class Characteristics : MonoBehaviour
     public float airControl = 0.3f;
     public float maxHp = 10;
     public float strength = 20;
-    public float dizziness = 10;
+    public float dizziness = 0;
     public float attackReach = 50;
     public int attackCooldown = 100;
     public int potions = 100;

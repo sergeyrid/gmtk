@@ -7,14 +7,24 @@ public class CamEffects : MonoBehaviour
     // Start is called before the first frame update
     Camera cam;
     GameObject camObj;
+    public GameObject player;
+    Characteristics stats;
+
+    float constShakeAmt = 1;
+    float constShakeRotAmt = 3;
+    float constShakeSmooth = 1;
+
     float shakeAmt = 1;
     float shakeRotAmt = 3;
     float shakeSmooth = 1;
+
     void Start()
     {
+        stats = player.GetComponent<Characteristics>();
         cam = Camera.main;
         camObj = cam.gameObject;
         //Camera.main.SetReplacementShader(Shader.Find("Custom/Shader"),"Opaque");
+        // StartShake(shakeAmt, shakeSmooth, 0.1f);
     }
 
     void Shake()
@@ -26,7 +36,7 @@ public class CamEffects : MonoBehaviour
     {
         shakeAmt = amt;
         CancelInvoke("Shake");
-        InvokeRepeating("Shake", delay,delay);
+        InvokeRepeating("Shake", delay, delay);
     }
 
     void StopShake()
@@ -35,8 +45,11 @@ public class CamEffects : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        shakeAmt = constShakeAmt * stats.dizziness;
+        shakeRotAmt = constShakeRotAmt * stats.dizziness;
+        shakeSmooth = constShakeSmooth * stats.dizziness;
+        Shake();
     }
 }
