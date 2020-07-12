@@ -30,10 +30,15 @@ public class Controls : MonoBehaviour
     public float hp;
     public int enemyLayer = 8;
     public int playerLayer = 10;
+    public int defaultLayer = 0;
+    public int physicsLayer = 9;
     public int ignoreLayer = 2;
+    public GameObject audioManager;
+    AudioSource source;
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         stats = GetComponent<Characteristics>();
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
@@ -172,6 +177,20 @@ public class Controls : MonoBehaviour
         if (hit.collider != null)
         {
             onGround = true;
+            if (hit.collider.transform.gameObject.layer == physicsLayer &&
+                Mathf.Abs(body.velocity.x) > 0.3f &&
+                !source.isPlaying)
+            {
+                AudioClip audio = audioManager.GetComponent<GetAudio>().woodStep;
+                source.PlayOneShot(audio);
+            }
+            else if (hit.collider.transform.gameObject.layer == defaultLayer &&
+                     Mathf.Abs(body.velocity.x) > 0.3f &&
+                     !source.isPlaying)
+            {
+                AudioClip audio = audioManager.GetComponent<GetAudio>().dirtStep;
+                source.PlayOneShot(audio);
+            }
         }
         else
         {
@@ -226,7 +245,11 @@ public class Controls : MonoBehaviour
         {
             return ;
         }
-        RaycastHit2D []enemiesHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction, attackReach, 1<<enemyLayer);
+        RaycastHit2D []enemiesHit = Physics2D.RaycastAll(transform.position, Vector2.right * direction,
+                                                         attackReach, 1<<enemyLayer);
+        AudioClip audio = audioManager.GetComponent<GetAudio>().playerAttack;
+        Debug.Log(audio);
+        source.PlayOneShot(audio);
         foreach (RaycastHit2D enemy in enemiesHit)
         {
             EvilAi cont = enemy.transform.gameObject.GetComponent<EvilAi>();
@@ -236,9 +259,7 @@ public class Controls : MonoBehaviour
             }
             else
             {
-                Debug.Log(enemy);
                 EvilFly cnt = enemy.transform.gameObject.GetComponent<EvilFly>();
-                Debug.Log(cnt);
                 cnt.TakeDamage(strength);
             }
         }
@@ -260,7 +281,7 @@ public class Controls : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        // animation;
+        animator.SetTrigger("getDamage");
         hp -= damage;
         if (hp < 0)
         {
