@@ -837,11 +837,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCooldown: 10
-  enemyLayer: 8
-  playerLayer: 10
-  ignoreLayer: 2
   animator: {fileID: 1786615586056490625}
   hp: 0
+  enemyLayer: 8
+  playerLayer: 10
+  defaultLayer: 0
+  physicsLayer: 9
+  ignoreLayer: 2
+  audioManager: {fileID: 0}
 --- !u!114 &1786615586056490687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +864,7 @@ MonoBehaviour:
   deltaAirControl: -0.01
   deltaMaxHp: 10
   deltaStrength: 20
-  deltaDizziness: 10
+  deltaDizziness: 0.3
   deltaAttackReach: 1
   deltaAttackCooldown: -1
 --- !u!114 &1786615586056490686
@@ -883,7 +886,7 @@ MonoBehaviour:
   airControl: 0.3
   maxHp: 10
   strength: 20
-  dizziness: 10
+  dizziness: 0
   attackReach: 50
   attackCooldown: 100
   potions: 20

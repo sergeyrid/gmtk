@@ -3999,26 +3999,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 459400451741816765, guid: 8c5e8e9357284294584068008db82729,
+    - target: {fileID: 459400451741816761, guid: 8c5e8e9357284294584068008db82729,
         type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 459400451741816767, guid: 8c5e8e9357284294584068008db82729,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.52960443
-      objectReference: {fileID: 0}
-    - target: {fileID: 459400451741816767, guid: 8c5e8e9357284294584068008db82729,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.42733178
-      objectReference: {fileID: 0}
-    - target: {fileID: 459400451741816767, guid: 8c5e8e9357284294584068008db82729,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.9150943
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1828334763}
     - target: {fileID: 492554598279196701, guid: 8c5e8e9357284294584068008db82729,
         type: 3}
       propertyPath: objToTrack
