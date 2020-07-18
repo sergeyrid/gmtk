@@ -165,6 +165,10 @@ public class Controls : MonoBehaviour
         {
             Attack();
         }
+        if (Input.GetButton("Reset"))
+        {
+            Death();
+        }
     }
 
     void CheckIfOnGround()
