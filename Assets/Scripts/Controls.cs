@@ -242,6 +242,7 @@ public class Controls : MonoBehaviour
                                                          attackReach, 1<<enemyLayer);
         AudioClip audio = audioManager.GetComponent<GetAudio>().playerAttack;
         source.PlayOneShot(audio);
+        animator.SetTrigger("Hit");
         foreach (RaycastHit2D enemy in enemiesHit)
         {
             EvilAi cont = enemy.transform.gameObject.GetComponent<EvilAi>();
