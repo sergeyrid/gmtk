@@ -19,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
         cc.Move(Input.GetAxisRaw("Horizontal") * Vector3.right * game_properties.potions_level * 0.75f);
         cc.Move(Vector3.down * game_properties.potions_level * Time.deltaTime * 10f);
         Jumping();
-
-
     }
     void Jumping()
     {
@@ -37,6 +35,5 @@ public class PlayerMovement : MonoBehaviour
             velocity -= fall_speed * Time.deltaTime;
         }
         cc.Move(new Vector3(0f, velocity, 0f) * game_properties.potions_level);
-        
     }
 }

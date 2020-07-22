@@ -56,7 +56,7 @@ public class EvilFly : MonoBehaviour
             body.velocity = new Vector2(-speed, body.velocity.y);
             if (Time.time - previoustime >= walktime)
             {
-                anim.SetBool("Moving",true);
+                //! anim.SetBool("Moving",true); doesnt work for some reason
                 previoustime = Time.time;
                 state = 1;
             }
@@ -66,7 +66,7 @@ public class EvilFly : MonoBehaviour
             body.velocity = new Vector2(0, body.velocity.y);
             if (Time.time - previoustime >= waittime)
             {
-                anim.SetBool("Moving",false);
+                //! anim.SetBool("Moving",false); doesnt work for some reason
                 previoustime = Time.time;
                 state = 2;
                 direction = 1;
@@ -79,7 +79,7 @@ public class EvilFly : MonoBehaviour
             body.velocity = new Vector2(speed, body.velocity.y);
             if (Time.time - previoustime >= walktime)
             {
-                anim.SetBool("Moving",true);
+                //! anim.SetBool("Moving",true); doesnt work for some reason
                 previoustime = Time.time;
                 state = 3;                
             }
@@ -89,7 +89,7 @@ public class EvilFly : MonoBehaviour
             body.velocity = new Vector2(0, body.velocity.y);
             if (Time.time - previoustime >= waittime)
             {
-                anim.SetBool("Moving",false);
+                //! anim.SetBool("Moving",false); doesnt work for some reason
                 previoustime = Time.time;
                 state = 0;
                 direction = -1;

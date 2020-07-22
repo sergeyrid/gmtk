@@ -44,7 +44,7 @@ public class Controls : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         height = GetComponent<Collider2D>().bounds.size.y;
         width = GetComponent<Collider2D>().bounds.size.x;
-        animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         hp = stats.maxHp;
     }
 
@@ -131,26 +131,23 @@ public class Controls : MonoBehaviour
         {
             return ;
         }
-        bool currentlyJumping = false;
-
+        CheckIfOnGround();
+        HorizontalMovement();
         if (jumpCurrentCooldown > 0)
         {
-            currentlyJumping = true;
             --jumpCurrentCooldown;
         }
         if (attackCurrentCooldown > 0)
         {
             --attackCurrentCooldown;
         }
-        CheckIfOnGround();
-        HorizontalMovement();
-
-        if (jumpCurrentCooldown <= 0)
-            currentlyJumping = false;
-
-        if(!currentlyJumping)
+        if(Mathf.Abs(body.velocity.x) > 1 && onGround) //! magic constant
         {
-            animator.SetBool("jumping", false);
+            animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
         }
     }
 
@@ -196,16 +193,17 @@ public class Controls : MonoBehaviour
                 AudioClip audio = audioManager.GetComponent<GetAudio>().dirtStep;
                 source.PlayOneShot(audio);
             }
+            animator.SetBool("IsInAir", false);
         }
         else
         {
             onGround = false;
+            animator.SetBool("IsInAir", true);
         }
     }
 
     void HorizontalMovement()
     {
-        bool isWalking = false;
         if (!onGround)
         {
             movement *= airControl;
@@ -217,19 +215,10 @@ public class Controls : MonoBehaviour
         else
         {
             body.AddForce(new Vector2(movement, 0));
-            isWalking = true;
         }
         if (Mathf.Abs(body.velocity.x) > speed)
         {
             body.velocity = new Vector2(speed * Mathf.Sign(body.velocity.x), body.velocity.y);
-        }
-        if(isWalking && onGround)
-        {
-            animator.SetBool("running", true);
-        }
-        else
-        {
-            animator.SetBool("running", false);
         }
     }
 
@@ -239,7 +228,7 @@ public class Controls : MonoBehaviour
         {
             body.AddForce(new Vector2(0, jumpHeight));
             jumpCurrentCooldown = jumpCooldown;
-            animator.SetBool("jumping", true);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -253,6 +242,7 @@ public class Controls : MonoBehaviour
                                                          attackReach, 1<<enemyLayer);
         AudioClip audio = audioManager.GetComponent<GetAudio>().playerAttack;
         source.PlayOneShot(audio);
+        animator.SetTrigger("Hit");
         foreach (RaycastHit2D enemy in enemiesHit)
         {
             EvilAi cont = enemy.transform.gameObject.GetComponent<EvilAi>();
@@ -280,7 +270,7 @@ public class Controls : MonoBehaviour
         AudioClip audio = audioManager.GetComponent<GetAudio>().playerDeath;
         source.PlayOneShot(audio);
         dead = true;
-        animator.SetBool("dead", true);
+        animator.SetTrigger("Death");
         Invoke("LoadLevel", 1.4f);
     }
     
@@ -288,7 +278,7 @@ public class Controls : MonoBehaviour
     {
         if (!dead)
         {
-            animator.SetTrigger("getDamage");
+            animator.SetTrigger("TakeDamage");
             AudioClip audio = audioManager.GetComponent<GetAudio>().playerDamage;
             source.PlayOneShot(audio);
         }
